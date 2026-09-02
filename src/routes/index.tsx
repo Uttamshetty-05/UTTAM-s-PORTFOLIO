@@ -10,25 +10,32 @@ import {
   GraduationCap,
   Award,
   FolderGit2,
+  Briefcase,
+  Trophy,
+  Languages,
 } from "lucide-react";
 import { Portrait } from "@/components/Portrait";
 import { SKILLS, SkillCard } from "@/components/portfolio/SkillOrbit";
 import { useReveal } from "@/hooks/use-reveal";
+import resume from "@/assets/resume.pdf.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Uttam Shetty — Computer Science Student & Developer" },
+      { title: "Uttam Shetty — Computer Science Engineering Graduate" },
       {
         name: "description",
         content:
-          "Interactive portfolio of Uttam Shetty: B.E. Computer Science student building Java, React, Firebase and IoT projects in Udupi, India.",
+          "Interactive portfolio of Uttam Shetty: Computer Science Engineering graduate and MERN stack intern building Java, Spring Boot, React, Firebase and IoT applications.",
       },
-      { property: "og:title", content: "Uttam Shetty — Computer Science Student & Developer" },
+      {
+        property: "og:title",
+        content: "Uttam Shetty — Computer Science Engineering Graduate",
+      },
       {
         property: "og:description",
         content:
-          "Java, C, SQL, React and Firebase projects — WildGuard IoT wildlife alerts and a digital tip payment system.",
+          "Java, Spring Boot, React and Firebase developer. MERN stack intern, WildGuard IoT wildlife alerts, digital UPI tipping platform.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -41,8 +48,9 @@ const NAV = [
   ["about", "About"],
   ["education", "Education"],
   ["skills", "Skills"],
-  ["courses", "Courses"],
+  ["experience", "Experience"],
   ["projects", "Projects"],
+  ["courses", "Courses"],
   ["contact", "Contact"],
 ] as const;
 
@@ -54,8 +62,10 @@ function Index() {
       <About />
       <Education />
       <Skills />
-      <Courses />
+      <Experience />
       <Projects />
+      <Courses />
+      <Achievements />
       <Contact />
       <footer className="border-t border-border py-8 text-center font-mono text-xs text-muted-foreground">
         © {new Date().getFullYear()} Uttam Shetty — built with curiosity.
@@ -134,10 +144,17 @@ function Section({
   );
 }
 
+const STATS = [
+  { value: "8.61", label: "CGPA / 10" },
+  { value: "80+", label: "LeetCode solved" },
+  { value: "20K+", label: "Images trained" },
+  { value: "3+", label: "Shipped projects" },
+];
+
 function Hero() {
   return (
     <header className="relative grid-bg">
-      <div className="mx-auto grid max-w-6xl items-center gap-14 px-5 pb-24 pt-32 md:grid-cols-2 md:pt-40">
+      <div className="mx-auto grid max-w-6xl items-center gap-14 px-5 pb-16 pt-32 md:grid-cols-2 md:pt-40">
         <div>
           <p className="font-mono text-xs tracking-[0.3em] text-accent">
             HELLO_WORLD<span className="caret">_</span>
@@ -145,12 +162,13 @@ function Hero() {
           <h1 className="mt-4 text-5xl font-bold leading-[1.05] sm:text-6xl">
             Uttam Shetty
             <span className="mt-2 block bg-linear-to-r from-accent to-amber bg-clip-text text-2xl font-semibold text-transparent sm:text-3xl">
-              Computer Science Student
+              Computer Science Engineering Graduate
             </span>
           </h1>
           <p className="mt-6 max-w-md text-muted-foreground">
-            Passionate about technology with a strong grasp of emerging fields, quick to learn, and
-            eager to grow through hands-on experience and teamwork.
+            Android, MERN and Spring Boot developer with hands-on experience in Firebase
+            integration, REST APIs and API testing — building real-time apps with GPS tracking,
+            push notifications and secure payments.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <a
@@ -160,9 +178,10 @@ function Hero() {
               Get In Touch
             </a>
             <a
-              href="https://uttamshetty-05.github.io/my-portfolio/Uttam_Resume.pdf"
+              href={resume.url}
               target="_blank"
               rel="noreferrer"
+              download="Uttam_Shetty_Resume.pdf"
               className="rounded-full border border-border px-6 py-3 text-sm font-semibold transition-colors hover:border-accent hover:text-accent"
             >
               Download Resume
@@ -170,12 +189,26 @@ function Hero() {
           </div>
           <a
             href="#about"
-            className="mt-14 inline-flex items-center gap-2 font-mono text-xs text-muted-foreground hover:text-accent"
+            className="mt-12 inline-flex items-center gap-2 font-mono text-xs text-muted-foreground hover:text-accent"
           >
             <ArrowDown className="h-4 w-4 animate-bounce" /> scroll
           </a>
         </div>
         <Portrait />
+      </div>
+
+      <div className="mx-auto grid max-w-6xl grid-cols-2 gap-4 px-5 pb-20 sm:grid-cols-4">
+        {STATS.map((s) => (
+          <div
+            key={s.label}
+            className="rounded-2xl border border-border bg-card/70 p-5 text-center backdrop-blur transition-all hover:-translate-y-1 hover:border-accent/60 hover:shadow-glow"
+          >
+            <p className="text-3xl font-bold text-accent">{s.value}</p>
+            <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+              {s.label}
+            </p>
+          </div>
+        ))}
       </div>
     </header>
   );
@@ -183,22 +216,24 @@ function Hero() {
 
 function About() {
   const facts = [
-    { icon: <MapPin className="h-4 w-4" />, label: "Udupi, India" },
+    { icon: <MapPin className="h-4 w-4" />, label: "Udupi, Karnataka, India" },
     { icon: <Mail className="h-4 w-4" />, label: "shettyuttam010@gmail.com" },
     { icon: <Phone className="h-4 w-4" />, label: "+91 6363671124" },
+    { icon: <Languages className="h-4 w-4" />, label: "English · Kannada · Hindi · Tulu" },
   ];
   return (
     <Section id="about" index="01" title="Hello, I'm Uttam!" subtitle="About">
       <div className="grid gap-10 md:grid-cols-[1.4fr_1fr]">
         <div className="space-y-5 text-lg leading-relaxed text-muted-foreground">
           <p>
-            A final year B.E. Computer Science student passionate about technology and innovation. I
-            have experience in Java, C, SQL and web development, with a strong foundation in
-            full-stack and mobile applications.
+            Computer Science Engineering graduate with hands-on experience in Android application
+            development, Firebase integration, REST APIs and software engineering principles.
           </p>
           <p>
-            I focus on problem-solving, teamwork, and delivering practical, creative solutions to
-            real-world challenges.
+            Skilled in Java, SQL, Spring Boot and API testing, with a strong understanding of OOP,
+            DBMS and data structures. I've built real-time mobile applications involving GPS
+            tracking, push notifications and secure payment systems — and I'm passionate about
+            problem-solving and scalable software development.
           </p>
         </div>
         <ul className="space-y-3">
@@ -220,7 +255,7 @@ function About() {
 const EDUCATION = [
   {
     period: "2022 – 2026",
-    score: "CGPA: 8.43 / 10",
+    score: "CGPA: 8.61 / 10",
     title: "Bachelor of Engineering in Computer Science",
     place: "Vivekananda College of Engineering and Technology, Puttur",
   },
@@ -228,7 +263,7 @@ const EDUCATION = [
     period: "2020 – 2022",
     score: "Percentage: 87.5%",
     title: "Pre-University Course (PCMCs)",
-    place: "Amratha Bharathi PU College, Hebri",
+    place: "PRN Amratha Bharathi PU College, Hebri",
   },
   {
     period: "2018 – 2020",
@@ -269,6 +304,17 @@ function Education() {
   );
 }
 
+const SKILL_GROUPS = [
+  { label: "Programming Languages", items: "Java · SQL · C" },
+  { label: "Frontend", items: "HTML · CSS · JavaScript · React.js" },
+  { label: "Backend & Cloud", items: "Spring Boot · Node.js · Express · Firebase · MongoDB" },
+  { label: "Tools & Platforms", items: "Git · GitHub · Docker · VS Code · SQL Workbench · Postman" },
+  {
+    label: "Core Concepts",
+    items: "OOP · DBMS · Data Structures · Algorithms · SDLC · REST APIs · Agile · API Testing",
+  },
+];
+
 function Skills() {
   return (
     <Section id="skills" index="03" title="Technical Skills" subtitle="My technical expertise">
@@ -277,38 +323,16 @@ function Skills() {
           <SkillCard key={s.name} skill={s} />
         ))}
       </div>
-    </Section>
-  );
-}
-
-const COURSES = [
-  { name: "Java Programming", org: "Coursera · Duke University", year: "2023" },
-  { name: "Tata Cybersecurity Security Analyst Job Simulation", org: "Forage", year: "Jun '25" },
-  { name: "Deloitte Australia Data Analytics Job Simulation", org: "Forage", year: "" },
-  { name: "Software Engineering Job Simulation", org: "Forage", year: "" },
-];
-
-function Courses() {
-  return (
-    <Section
-      id="courses"
-      index="04"
-      title="Courses Completed"
-      subtitle="Certifications and online courses"
-      icon={<Award className="h-7 w-7 text-accent" />}
-    >
-      <div className="grid gap-4 sm:grid-cols-2">
-        {COURSES.map((c) => (
+      <div className="mt-8 grid gap-3 sm:grid-cols-2">
+        {SKILL_GROUPS.map((g) => (
           <div
-            key={c.name}
-            className="group relative overflow-hidden rounded-2xl border border-border bg-card/70 p-6 transition-all hover:-translate-y-1 hover:border-accent/60"
+            key={g.label}
+            className="rounded-xl border border-border bg-card/50 p-4 transition-colors hover:border-accent/60"
           >
-            <div className="absolute inset-x-0 -bottom-px h-px bg-linear-to-r from-transparent via-accent to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
-            <h3 className="text-lg font-semibold">{c.name}</h3>
-            <p className="mt-2 font-mono text-xs text-muted-foreground">
-              {c.org}
-              {c.year ? ` · ${c.year}` : ""}
+            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-accent">
+              {g.label}
             </p>
+            <p className="mt-1 text-sm text-muted-foreground">{g.items}</p>
           </div>
         ))}
       </div>
@@ -316,18 +340,119 @@ function Courses() {
   );
 }
 
+function Experience() {
+  const points = [
+    "Developed responsive web applications using MongoDB, Express.js, React.js and Node.js.",
+    "Worked on frontend–backend integration and REST API connectivity.",
+    "Used Git and GitHub for version control and collaborative development.",
+    "Improved debugging, testing and problem-solving skills through practical development tasks.",
+  ];
+  const stack = ["MongoDB", "Express.js", "React.js", "Node.js", "REST APIs", "Git"];
+  return (
+    <Section
+      id="experience"
+      index="04"
+      title="Internship Experience"
+      subtitle="Where I applied it in the real world"
+      icon={<Briefcase className="h-7 w-7 text-accent" />}
+    >
+      <div className="group relative overflow-hidden rounded-3xl border border-border bg-card/70 p-8 shadow-card transition-all hover:-translate-y-1 hover:border-accent/60 hover:shadow-glow">
+        <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-accent to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+        <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-accent">Internship</p>
+        <h3 className="mt-3 text-2xl font-semibold">MERN Stack Intern</h3>
+        <ul className="mt-5 space-y-3">
+          {points.map((p) => (
+            <li key={p} className="flex gap-3 text-muted-foreground">
+              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+              <span>{p}</span>
+            </li>
+          ))}
+        </ul>
+        <div className="mt-6 flex flex-wrap gap-2">
+          {stack.map((t) => (
+            <span
+              key={t}
+              className="rounded-full border border-border bg-secondary px-3 py-1 font-mono text-xs text-muted-foreground transition-colors group-hover:border-accent/50 group-hover:text-accent"
+            >
+              {t}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <div className="mt-6 grid gap-4 md:grid-cols-2">
+        {INTERN_PROJECTS.map((p) => (
+          <div
+            key={p.title}
+            className="rounded-2xl border border-border bg-card/60 p-6 transition-all hover:-translate-y-1 hover:border-accent/60"
+          >
+            <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-accent">
+              Internship Project
+            </p>
+            <h4 className="mt-2 text-lg font-semibold">{p.title}</h4>
+            <p className="mt-2 text-sm text-muted-foreground">{p.desc}</p>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {p.tech.map((t) => (
+                <span
+                  key={t}
+                  className="rounded-full border border-border bg-secondary px-3 py-1 font-mono text-[11px] text-muted-foreground"
+                >
+                  {t}
+                </span>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </Section>
+  );
+}
+
+const INTERN_PROJECTS = [
+  {
+    title: "Responsive MERN Web Application",
+    desc: "Built a full-stack responsive application with a React front end, Express/Node REST API and MongoDB persistence, wiring UI state to live API data.",
+    tech: ["React.js", "Node.js", "Express.js", "MongoDB"],
+  },
+  {
+    title: "REST API Integration & Testing",
+    desc: "Connected frontend modules to backend endpoints, validated request/response flows in Postman, and debugged integration issues collaboratively on GitHub.",
+    tech: ["REST APIs", "Postman", "Git", "GitHub"],
+  },
+];
+
 const PROJECTS = [
   {
-    kind: "Academic Project",
+    kind: "Major Project",
     title: "WildGuard – IoT-based Wildlife Detection & Alert System",
-    desc: "Android application that detects wild animals on roads and alerts drivers within a one-kilometre radius.",
-    tech: ["Arduino", "YOLOv8", "imgbb", "Firebase"],
+    points: [
+      "AI-powered Android app using YOLOv8, Python, Kotlin, Firebase, REST APIs and GPS location services.",
+      "Trained and tested a custom dataset of 20,000+ wildlife images.",
+      "Integrated Firebase Cloud Messaging for real-time wildlife alerts and notifications.",
+      "Implemented Firestore synchronisation and location-based alert systems.",
+      "Designed a scalable architecture supporting future ML integration.",
+    ],
+    tech: ["YOLOv8", "Kotlin", "Python", "Firebase", "REST APIs", "GPS"],
   },
   {
     kind: "Academic Project",
     title: "Digital Tip Payment System",
-    desc: "Cashless tipping solution using QR codes and UPI for easy digital transactions with full transparency.",
-    tech: ["Kotlin", "Firebase", "Google Pay API", "QR Generator"],
+    points: [
+      "Secure digital payment platform using QR code and UPI integration.",
+      "Firebase Authentication with secure transaction handling mechanisms.",
+      "User-friendly payment workflow focused on reliability and transparency.",
+    ],
+    tech: ["Kotlin", "Firebase Auth", "UPI", "QR Generator"],
+  },
+  {
+    kind: "Mini Projects",
+    title: "Java Academic Mini Projects",
+    points: [
+      "Student Management System and ATM Simulation built in Java.",
+      "Applied OOP concepts, debugging techniques and clean coding practices.",
+      "Managed repositories on GitHub with documentation and version control.",
+    ],
+    tech: ["Java", "OOP", "GitHub"],
   },
 ];
 
@@ -350,7 +475,14 @@ function Projects() {
               {p.kind}
             </span>
             <h3 className="mt-3 text-2xl font-semibold leading-snug">{p.title}</h3>
-            <p className="mt-3 text-muted-foreground">{p.desc}</p>
+            <ul className="mt-4 space-y-2">
+              {p.points.map((pt) => (
+                <li key={pt} className="flex gap-3 text-sm text-muted-foreground">
+                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent/70" />
+                  <span>{pt}</span>
+                </li>
+              ))}
+            </ul>
             <div className="mt-6 flex flex-wrap gap-2">
               {p.tech.map((t) => (
                 <span
@@ -362,6 +494,70 @@ function Projects() {
               ))}
             </div>
           </article>
+        ))}
+      </div>
+    </Section>
+  );
+}
+
+const COURSES = [
+  { name: "Java Programming", org: "Coursera · Duke University", year: "2023" },
+  { name: "Tata Cybersecurity Security Analyst Job Simulation", org: "Forage", year: "2025" },
+  { name: "Deloitte Australia Data Analytics Job Simulation", org: "Forage", year: "" },
+  { name: "Software Engineering Job Simulation", org: "Forage", year: "" },
+];
+
+function Courses() {
+  return (
+    <Section
+      id="courses"
+      index="06"
+      title="Courses & Certifications"
+      subtitle="Certifications and online courses"
+      icon={<Award className="h-7 w-7 text-accent" />}
+    >
+      <div className="grid gap-4 sm:grid-cols-2">
+        {COURSES.map((c) => (
+          <div
+            key={c.name}
+            className="group relative overflow-hidden rounded-2xl border border-border bg-card/70 p-6 transition-all hover:-translate-y-1 hover:border-accent/60"
+          >
+            <div className="absolute inset-x-0 -bottom-px h-px bg-linear-to-r from-transparent via-accent to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+            <h3 className="text-lg font-semibold">{c.name}</h3>
+            <p className="mt-2 font-mono text-xs text-muted-foreground">
+              {c.org}
+              {c.year ? ` · ${c.year}` : ""}
+            </p>
+          </div>
+        ))}
+      </div>
+    </Section>
+  );
+}
+
+const ACHIEVEMENTS = [
+  "Solved 80+ coding problems on LeetCode focused on Java and DSA concepts.",
+  "Practised competitive programming and sharpened algorithmic thinking.",
+  "Built multiple academic and personal projects using modern technologies.",
+];
+
+function Achievements() {
+  return (
+    <Section
+      id="achievements"
+      index="07"
+      title="Achievements"
+      subtitle="Consistency beyond the classroom"
+      icon={<Trophy className="h-7 w-7 text-accent" />}
+    >
+      <div className="grid gap-4 md:grid-cols-3">
+        {ACHIEVEMENTS.map((a) => (
+          <div
+            key={a}
+            className="rounded-2xl border border-border bg-card/70 p-6 text-sm text-muted-foreground transition-all hover:-translate-y-1 hover:border-accent/60 hover:shadow-glow"
+          >
+            {a}
+          </div>
         ))}
       </div>
     </Section>
@@ -397,7 +593,7 @@ const LINKS = [
 
 function Contact() {
   return (
-    <Section id="contact" index="06" title="Get In Touch" subtitle="Let's work together">
+    <Section id="contact" index="08" title="Get In Touch" subtitle="Let's work together">
       <div className="grid gap-4 sm:grid-cols-2">
         {LINKS.map((l) => (
           <a
@@ -416,6 +612,22 @@ function Contact() {
             </span>
           </a>
         ))}
+      </div>
+      <div className="mt-8 rounded-3xl border border-border bg-card/60 p-8 text-center">
+        <h3 className="text-2xl font-semibold">Looking for a developer who ships?</h3>
+        <p className="mx-auto mt-2 max-w-lg text-muted-foreground">
+          Open to software engineering, backend and full-stack roles. My full resume is one click
+          away.
+        </p>
+        <a
+          href={resume.url}
+          target="_blank"
+          rel="noreferrer"
+          download="Uttam_Shetty_Resume.pdf"
+          className="mt-6 inline-block rounded-full bg-accent px-7 py-3 text-sm font-semibold text-accent-foreground transition-transform hover:-translate-y-0.5"
+        >
+          Download Resume
+        </a>
       </div>
     </Section>
   );
