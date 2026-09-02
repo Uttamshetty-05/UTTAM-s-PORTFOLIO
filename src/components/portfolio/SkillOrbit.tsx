@@ -8,17 +8,20 @@ export type Skill = {
 };
 
 export const SKILLS: Skill[] = [
-  { name: "Java", level: 88, blurb: "OOP, collections, DSA practice", tag: "language" },
-  { name: "C", level: 80, blurb: "Memory, pointers, systems basics", tag: "language" },
-  { name: "SQL", level: 82, blurb: "Joins, schema design, queries", tag: "data" },
-  { name: "HTML", level: 90, blurb: "Semantic, accessible markup", tag: "web" },
-  { name: "CSS", level: 85, blurb: "Responsive layouts, animation", tag: "web" },
-  { name: "React.js", level: 78, blurb: "Components, hooks, state", tag: "web" },
-  { name: "Firebase", level: 80, blurb: "Auth, Firestore, realtime data", tag: "cloud" },
+  { name: "Java", level: 90, blurb: "OOP, collections, DSA, 80+ LeetCode problems", tag: "language" },
+  { name: "SQL", level: 84, blurb: "DBMS design, joins, SQL Workbench", tag: "data" },
+  { name: "C", level: 78, blurb: "Memory, pointers, systems basics", tag: "language" },
+  { name: "Spring Boot", level: 76, blurb: "REST APIs, layered backend services", tag: "backend" },
+  { name: "React.js", level: 82, blurb: "Components, hooks, responsive UIs", tag: "frontend" },
+  { name: "Node.js / Express", level: 75, blurb: "MERN backends, routing, middleware", tag: "backend" },
+  { name: "MongoDB", level: 74, blurb: "Schemas, queries, MERN data layer", tag: "data" },
+  { name: "HTML / CSS / JS", level: 90, blurb: "Semantic markup, responsive layouts", tag: "frontend" },
+  { name: "Firebase", level: 85, blurb: "Auth, Firestore, Cloud Messaging", tag: "cloud" },
+  { name: "Postman / API Testing", level: 80, blurb: "REST API testing and debugging", tag: "testing" },
   { name: "Docker", level: 68, blurb: "Images, containers, compose", tag: "devops" },
-  { name: "Git", level: 86, blurb: "Branching, rebase, history", tag: "devops" },
-  { name: "GitHub", level: 88, blurb: "PRs, Actions, collaboration", tag: "devops" },
+  { name: "Git & GitHub", level: 88, blurb: "Branching, PRs, collaborative workflow", tag: "devops" },
 ];
+
 
 export function SkillCard({ skill }: { skill: Skill }) {
   const [hover, setHover] = useState(false);
