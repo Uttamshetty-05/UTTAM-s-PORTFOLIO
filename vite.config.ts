@@ -16,4 +16,8 @@ export default defineConfig({
       },
     },
   },
+
+  vite: {
+    base: "/UTTAM-s-PORTFOLIO/",
+  },
 });
