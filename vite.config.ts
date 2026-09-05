@@ -4,18 +4,10 @@
 //     nitro (build-only using cloudflare as a default target), VITE_* env injection, @ path alias,
 //     React/TanStack dedupe, error logger plugins, and sandbox detection (port/host/strictPort).
 // You can pass additional config via defineConfig({ vite: { ... }, etc... }) if needed.
-export default defineConfig({
-  base: "/UTTAM-s-PORTFOLIO/",
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
 
-  tanstackStart: {
-    server: {
-      entry: "server",
-    },
-    spa: {
-      enabled: true,
-      prerender: {
-        outputPath: "/index.html",
-      },
-    },
-  },
+export default defineConfig({
+  plugins: [react()],
+  base: "/UTTAM-s-PORTFOLIO/",
 });
