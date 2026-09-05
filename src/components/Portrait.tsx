@@ -11,6 +11,27 @@ export function Portrait() {
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
   const [active, setActive] = useState(false);
   const [introDone, setIntroDone] = useState(false);
+  const spokenRef = useRef(false);
+
+  useEffect(() => {
+    // Greet visitors with a short voice intro once the page opens.
+    const timer = setTimeout(() => {
+      if (
+        typeof window !== "undefined" &&
+        "speechSynthesis" in window &&
+        !spokenRef.current
+      ) {
+        spokenRef.current = true;
+        const utterance = new SpeechSynthesisUtterance(
+          "Hello, this is Uttam Shetty, aspiring computer science graduate."
+        );
+        utterance.rate = 0.92;
+        utterance.pitch = 1;
+        window.speechSynthesis.speak(utterance);
+      }
+    }, 800);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     let raf = 0;

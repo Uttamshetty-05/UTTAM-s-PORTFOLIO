@@ -152,7 +152,7 @@
 }
 
 @utility portrait-intro {
-  animation: intro-spin 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: intro-spin 2.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 @utility float-chip {
