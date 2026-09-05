@@ -75,6 +75,7 @@ export function Portrait() {
           {"git commit -m \"fix: edge case\""}
         </ThoughtChip>
       </div>
+      </div>
     </div>
   );
 }
