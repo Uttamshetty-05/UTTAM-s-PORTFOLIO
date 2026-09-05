@@ -2,14 +2,15 @@ import { useEffect, useRef, useState } from "react";
 import portrait from "@/assets/uttam.png";
 
 /**
- * Portrait that slightly rotates toward the cursor — as if looking at / thinking
- * about the code floating around it. Falls back to a slow idle "pondering" sway
- * when the pointer is idle or unavailable.
+ * Portrait that does a full 360° spin on first load, then rotates toward the
+ * cursor — as if looking at / thinking about the code floating around it.
+ * Falls back to a slow idle "pondering" sway when the pointer is idle.
  */
 export function Portrait() {
   const ref = useRef<HTMLDivElement>(null);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
   const [active, setActive] = useState(false);
+  const [introDone, setIntroDone] = useState(false);
 
   useEffect(() => {
     let raf = 0;
@@ -41,14 +42,18 @@ export function Portrait() {
     <div className="relative mx-auto w-full max-w-sm" style={{ perspective: "900px" }}>
       <div className="pointer-events-none absolute -inset-10 rounded-full bg-accent/15 blur-3xl" />
       <div
-        ref={ref}
-        className={active ? "portrait-stage" : "portrait-stage portrait-idle"}
-        style={{
-          transform: active
-            ? `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`
-            : undefined,
-        }}
+        className={introDone ? undefined : "portrait-intro"}
+        onAnimationEnd={() => setIntroDone(true)}
       >
+        <div
+          ref={ref}
+          className={active ? "portrait-stage" : "portrait-stage portrait-idle"}
+          style={{
+            transform: active
+              ? `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`
+              : undefined,
+          }}
+        >
         <div className="relative overflow-hidden rounded-[2rem] border border-border bg-card shadow-glow">
           <img
             src={portrait}

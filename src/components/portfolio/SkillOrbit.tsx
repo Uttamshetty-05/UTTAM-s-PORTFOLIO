@@ -54,7 +54,6 @@ export function SkillCard({ skill }: { skill: Skill }) {
             {skill.tag}
           </p>
           <h3 className="text-lg font-semibold">{skill.name}</h3>
-          <p className="font-mono text-xs text-accent">{skill.level}%</p>
         </div>
       </div>
       <p
