@@ -151,6 +151,10 @@
   animation: ponder 7s ease-in-out infinite;
 }
 
+@utility portrait-intro {
+  animation: intro-spin 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
 @utility float-chip {
   animation: floaty 5.5s ease-in-out infinite;
 }
@@ -185,6 +189,15 @@
   }
   50% {
     transform: rotateY(8deg) rotateX(-3deg) translateY(-8px);
+  }
+}
+
+@keyframes intro-spin {
+  0% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(360deg);
   }
 }
 
