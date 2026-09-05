@@ -7,6 +7,7 @@
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
 export default defineConfig({
+  base: "/UTTAM-s-PORTFOLIO/",
   tanstackStart: {
     server: { entry: "server" },
     spa: {
@@ -15,9 +16,5 @@ export default defineConfig({
         outputPath: "/index.html",
       },
     },
-  },
-
-  vite: {
-    base: "/UTTAM-s-PORTFOLIO/",
   },
 });
