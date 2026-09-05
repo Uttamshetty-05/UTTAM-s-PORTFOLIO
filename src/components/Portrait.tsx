@@ -54,27 +54,27 @@ export function Portrait() {
               : undefined,
           }}
         >
-        <div className="relative overflow-hidden rounded-[2rem] border border-border bg-card shadow-glow">
-          <img
-            src={portrait}
-            alt="Uttam Shetty, computer science student, deep in thought"
-            className="w-full object-cover"
-            style={{ transform: "translateZ(40px) scale(1.02)" }}
-          />
-          <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-background via-transparent to-transparent opacity-70" />
-          <div className="scanline pointer-events-none absolute inset-0" />
-        </div>
+          <div className="relative overflow-hidden rounded-[2rem] border border-border bg-card shadow-glow">
+            <img
+              src={portrait}
+              alt="Uttam Shetty, computer science student, deep in thought"
+              className="w-full object-cover"
+              style={{ transform: "translateZ(40px) scale(1.02)" }}
+            />
+            <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-background via-transparent to-transparent opacity-70" />
+            <div className="scanline pointer-events-none absolute inset-0" />
+          </div>
 
-        <ThoughtChip className="-left-8 top-6" delay="0s">
-          {"while (learning) { build(); }"}
-        </ThoughtChip>
-        <ThoughtChip className="-right-6 top-1/3" delay="1.2s">
-          {"O(n log n)?"}
-        </ThoughtChip>
-        <ThoughtChip className="-left-4 bottom-10" delay="2.1s">
-          {"git commit -m \"fix: edge case\""}
-        </ThoughtChip>
-      </div>
+          <ThoughtChip className="-left-8 top-6" delay="0s">
+            {"while (learning) { build(); }"}
+          </ThoughtChip>
+          <ThoughtChip className="-right-6 top-1/3" delay="1.2s">
+            {"O(n log n)?"}
+          </ThoughtChip>
+          <ThoughtChip className="-left-4 bottom-10" delay="2.1s">
+            {"git commit -m \"fix: edge case\""}
+          </ThoughtChip>
+        </div>
       </div>
     </div>
   );
