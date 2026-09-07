@@ -1,13 +1,21 @@
+import { QueryClient } from "@tanstack/react-query";
 import { createRouter } from "@tanstack/react-router";
 import { routeTree } from "./routeTree.gen";
 
-export const router = createRouter({
-  routeTree,
-  basepath: "/UTTAM-s-PORTFOLIO",
-});
+export function getRouter() {
+  const queryClient = new QueryClient();
+
+  return createRouter({
+    routeTree,
+    context: {
+      queryClient,
+    },
+    basepath: "/UTTAM-s-PORTFOLIO",
+  });
+}
 
 declare module "@tanstack/react-router" {
   interface Register {
-    router: typeof router;
+    router: ReturnType<typeof getRouter>;
   }
 }
