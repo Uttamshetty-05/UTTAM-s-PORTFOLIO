@@ -3,6 +3,7 @@ import { routeTree } from "./routeTree.gen";
 
 export const router = createRouter({
   routeTree,
+  basepath: "/UTTAM-s-PORTFOLIO",
 });
 
 declare module "@tanstack/react-router" {
