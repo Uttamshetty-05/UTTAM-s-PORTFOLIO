@@ -1,28 +1,17 @@
 import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
-import { RouterProvider, createRouter } from "@tanstack/react-router";
-import { routeTree } from "./routeTree.gen";
+import { RouterProvider } from "@tanstack/react-router";
+import { router } from "./router";
 import "./styles.css";
 
-const router = createRouter({
-  routeTree,
-  basepath: "/UTTAM-s-PORTFOLIO",
-});
+const rootElement = document.getElementById("root");
 
-declare module "@tanstack/react-router" {
-  interface Register {
-    router: typeof router;
-  }
+if (!rootElement) {
+  throw new Error("Root element not found");
 }
 
-const rootElement = document.getElementById("root")!;
-
-if (!rootElement.innerHTML) {
-  const root = ReactDOM.createRoot(rootElement);
-
-  root.render(
-    <StrictMode>
-      <RouterProvider router={router} />
-    </StrictMode>,
-  );
-}
+ReactDOM.createRoot(rootElement).render(
+  <StrictMode>
+    <RouterProvider router={router} />
+  </StrictMode>,
+);
